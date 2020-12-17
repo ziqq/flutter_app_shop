@@ -23,13 +23,19 @@ class Body extends StatelessWidget {
         ),
         Categories(),
         Expanded(
-          child: GridView.builder(
-            itemCount: products.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 0.75,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+            child: GridView.builder(
+              itemCount: products.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: kDefaultPadding,
+                crossAxisSpacing: kDefaultPadding,
+                childAspectRatio: 0.75,
+              ),
+              itemBuilder: (context, index) =>
+                  ItemCard(product: products[index]),
             ),
-            itemBuilder: (context, index) => ItemCard(),
           ),
         )
       ],
@@ -54,18 +60,20 @@ class ItemCard extends StatelessWidget {
       children: [
         Container(
           padding: EdgeInsets.all(kDefaultPadding),
-          height: 180,
-          width: 160,
+          // For demo we use fixed height and width
+          // Now we dont need them
+          // height: 180,
+          // width: 160,
           decoration: BoxDecoration(
-            color: products[0].color,
+            color: product.color,
             borderRadius: BorderRadius.circular(16),
           ),
-          child: Image.asset(products[0].image),
+          child: Image.asset(product.image),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: kDefaultPadding / 4),
           child: Text(
-            products[0].title,
+            product.title,
             style: TextStyle(color: kTextLightColor),
           ),
         ),
